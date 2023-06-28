@@ -2,7 +2,7 @@
 //  ToDoItem.swift
 //  ToDoListJK
 //
-//  Created by Kiran Kari on 6/28/23.
+//  Created by Jahnavi Kari on 6/28/23.
 //
 
 import Foundation

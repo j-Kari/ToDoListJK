@@ -2,14 +2,17 @@
 //  ContentView.swift
 //  ToDoListJK
 //
-//  Created by Kiran Kari on 6/28/23.
+//  Created by Jahnavi Kari on 6/28/23.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     
-    @State var toDoItems: [ToDoItem] = []
+    @FetchRequest(
+            entity: ToDo.entity(), sortDescriptors: [ NSSortDescriptor(keyPath: \ToDo.id, ascending: false) ])
+        
+    var toDoItems: FetchedResults<ToDo>
     @State private var showNewTask = false
     
     var body: some View {
@@ -34,15 +37,15 @@ struct ContentView: View {
         }
         
         if showNewTask {
-            NewToDoView(title: "", isImportant: false, toDoItems: $toDoItems, showNewTask: $showNewTask)
+            NewToDoView(title: "", isImportant: false, showNewTask: $showNewTask)
         }
         
         List {
             ForEach(toDoItems) { toDoItem in
                 if toDoItem.isImportant == true {
-                    Text("‼️" + toDoItem.title)
+                    Text("‼️" + (toDoItem.title ?? "No title"))
                 } else {
-                    Text(toDoItem.title)
+                                    Text(toDoItem.title ?? "No title")
                 }
             }
         }
